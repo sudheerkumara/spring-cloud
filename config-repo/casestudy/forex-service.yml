@@ -1,0 +1,23 @@
+server:
+  servlet:
+    context-path: /fx
+  port: 8040
+logging:
+  level:
+    com.springboot.app: DEBUG
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

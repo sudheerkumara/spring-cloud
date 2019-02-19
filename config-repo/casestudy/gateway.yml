@@ -1,0 +1,44 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 80000
+ribbon:
+  ReadTimeout: 80000
+  ConnectTimeout: 80000
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 80000
+    socket-timeout-millis: 80000
+  routes:
+    account-service:
+      path: /accounts/**
+      serviceId: account-service
+      stripPrefix: false
+      sensitiveHeaders: null
+    forex-service:
+      path: /fx/**
+      serviceId: forex-service
+      stripPrefix: false
+      sensitiveHeaders: null
+    payment-service:
+      path: /payment/**
+      serviceId: payment-service
+      stripPrefix: false
+      sensitiveHeaders: null
+server:
+  port: 4000
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
